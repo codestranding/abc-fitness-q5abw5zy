@@ -8,17 +8,24 @@ document.addEventListener('DOMContentLoaded', () => {
     subscribeForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('subscribe-email')?.value.trim() || '';
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic format check
+
       if (!email) {
         alert('Please fill out this field.');
         return;
       }
+      if (!isEmail.test(email)) {
+        // OPTIONAL extra validation (not required by Touchstone)
+        alert('Please enter a valid email address.');
+        return;
+      }
+
       alert('Thank you for subscribing.');
       subscribeForm.reset();
     });
   }
 
   /* ============ 2) Gallery: Cart Buttons & Modal ============ */
-  // Add to Cart
   document.querySelectorAll('.add-to-cart').forEach((btn) => {
     btn.addEventListener('click', () => {
       const item = btn.dataset.item || 'Item';
@@ -27,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Modal elements
   const modal = document.getElementById('cart-modal');
   const itemsList = document.getElementById('cart-items');
   const viewBtn = document.getElementById('view-cart');
@@ -56,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (modal) {
     modal.addEventListener('click', (e) => {
-      // click outside dialog closes
       if (e.target === modal) modal.classList.add('hidden');
     });
     window.addEventListener('keydown', (e) => {
@@ -94,20 +99,4 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = contactForm.querySelector('[name="name"]')?.value.trim() || '';
-      const email = contactForm.querySelector('[name="email"]')?.value.trim() || '';
-      const message = contactForm.querySelector('[name="message"]')?.value.trim() || '';
-
-      if (!name && !email && !message) {
-        alert('Please enter your name, email, and feedback.');
-        return;
-      }
-      if (!name || !email || !message) {
-        alert('Please fill out this field.');
-        return;
-      }
-      alert('Thank you for your message');
-      contactForm.reset();
-    });
-  }
-});
-
+      const email = contactForm.querySelect
