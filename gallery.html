@@ -2,23 +2,18 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ABC Fitness Studio - Gallery</title>
   <style>
-body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; background-color: #fff; }
-header { background-color: #000; color: #fff; padding: 15px; }
-nav a { margin-right: 15px; color: #fff; text-decoration: none; }
-h1 { margin: 20px; }
-.hero { background-color: #f5f5f5; padding: 60px 20px; text-align: center; }
-.button { display: inline-block; background-color: #C00000; color: #fff; padding: 10px 20px; margin-top: 20px; text-decoration: none; border-radius: 4px; }
-.gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-.gallery .item { width: 200px; height: 120px; background-color: #eee; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; }
-.section { padding: 20px; }
-.classes { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; }
-.class-card { flex: 1 1 45%; border: 1px solid #ccc; padding: 20px; background-color: #f9f9f9; }
-form { max-width: 400px; margin: 0 auto; }
-form input, form textarea { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
-footer { background-color: #000; color: #fff; text-align: center; padding: 15px; margin-top: 40px; }
-</style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; background-color: #fff; }
+    header { background-color: #000; color: #fff; padding: 15px; }
+    nav a { margin-right: 15px; color: #fff; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    h1 { margin: 20px; }
+    .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+    .gallery .item { width: 200px; height: 120px; background-color: #eee; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; }
+    footer { background-color: #000; color: #fff; text-align: center; padding: 15px; margin-top: 40px; }
+  </style>
 </head>
 <body>
 
@@ -26,21 +21,21 @@ footer { background-color: #000; color: #fff; text-align: center; padding: 15px;
   <h2>ABC Fitness Studio</h2>
   <nav>
     <a href="index.html">Home</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="about.html">About Us</a>
+    <a href="gallery.html" aria-current="page">Gallery</a>
+    <a href="about.html">About Us / Contact</a>
     <a href="classes.html">Classes</a>
   </nav>
 </header>
 
-  <h1>Gallery</h1>
-  <div class="gallery">
-    <div class="item">Image 1</div>
-    <div class="item">Image 2</div>
-    <div class="item">Image 3</div>
-    <div class="item">Image 4</div>
-    <div class="item">Image 5</div>
-    <div class="item">Image 6</div>
-  </div>
+<h1>Gallery</h1>
+<div class="gallery">
+  <div class="item">Image 1</div>
+  <div class="item">Image 2</div>
+  <div class="item">Image 3</div>
+  <div class="item">Image 4</div>
+  <div class="item">Image 5</div>
+  <div class="item">Image 6</div>
+</div>
 
 <footer>
   <p>&copy; 2025 ABC Fitness Studio</p>
