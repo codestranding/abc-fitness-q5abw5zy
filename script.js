@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       if (!isEmail.test(email)) {
-        // OPTIONAL extra validation (not required by Touchstone)
         alert('Please enter a valid email address.');
         return;
       }
