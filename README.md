@@ -11,4 +11,4 @@ A Classes page [(classes.html)](https://codestranding.github.io/stackblitz-start
 
 A Gallery page [(gallery.html)](https://codestranding.github.io/stackblitz-starters-q5abw5zy/classes.html)
 
-The site demonstrates basic HTML, CSS, and JavaScript.
+
