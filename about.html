@@ -20,7 +20,7 @@
 
     footer { background-color: #000; color: #fff; text-align: center; padding: 15px; margin-top: 40px; }
 
-    /* simple styling for the subscribe form */
+    /* subscribe form */
     footer form#subscribe-form { margin-top: 10px; display: inline-flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     footer input[type="email"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
     footer button { padding: 8px 12px; border: none; border-radius: 4px; background: #C00000; color: #fff; cursor: pointer; }
@@ -48,17 +48,17 @@
 
 <div class="section">
   <h3>Contact Us</h3>
-  <form>
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+  <!-- Contact form with custom validation via JS -->
+  <form id="contact-form" novalidate>
+    <input type="text" name="name" placeholder="Your Name">
+    <input type="email" name="email" placeholder="Your Email">
+    <textarea name="message" placeholder="Your Message" rows="5"></textarea>
     <button type="submit" class="button">Send</button>
   </form>
 </div>
 
 <footer>
   <p>&copy; 2025 ABC Fitness Studio</p>
-
   <!-- Subscribe (required on every page) -->
   <form id="subscribe-form" novalidate>
     <label for="subscribe-email" style="position:absolute;left:-9999px;">Your email</label>
@@ -67,7 +67,6 @@
   </form>
 </footer>
 
-<!-- add the JS file that handles the alerts -->
 <script src="script.js"></script>
 </body>
 </html>
