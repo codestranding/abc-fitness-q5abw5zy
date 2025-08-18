@@ -1,6 +1,9 @@
 // Simple in-memory cart (Gallery page)
 const cart = [];
 
+// basic email format check
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 document.addEventListener('DOMContentLoaded', () => {
   /* ============ 1) Footer Subscribe (all pages) ============ */
   const subscribeForm = document.getElementById('subscribe-form');
@@ -8,14 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     subscribeForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('subscribe-email')?.value.trim() || '';
-      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic format check
 
       if (!email) {
         alert('Please fill out this field.');
         return;
       }
-      if (!isEmail.test(email)) {
-        alert('Please enter a valid email address.');
+      if (!EMAIL_RE.test(email)) {
+        alert('Invalid email.');
         return;
       }
 
@@ -98,4 +100,25 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = contactForm.querySelector('[name="name"]')?.value.trim() || '';
-      const email = contactForm.querySelect
+      const email = contactForm.querySelector('[name="email"]')?.value.trim() || '';
+      const message = contactForm.querySelector('[name="message"]')?.value.trim() || '';
+
+      if (!name && !email && !message) {
+        alert('Please enter your name, email, and feedback.');
+        return;
+      }
+      if (!name || !email || !message) {
+        alert('Please fill out this field.');
+        return;
+      }
+      // all fields present; now check email format
+      if (!EMAIL_RE.test(email)) {
+        alert('Invalid email.');
+        return;
+      }
+
+      alert('Thank you for your message');
+      contactForm.reset();
+    });
+  }
+});
