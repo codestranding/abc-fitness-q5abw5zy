@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,14 +12,12 @@
     h1 { margin: 20px; }
 
     .section { padding: 20px; max-width: 800px; margin: 0 auto; }
-
-    /* contact form */
     form { max-width: 500px; margin: 0 auto; }
     form input, form textarea { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
-    .button { display: inline-block; background-color: #C00000; color: #fff; padding: 10px 20px; text-decoration: none; border: none; border-radius: 4px; cursor: pointer; }
+    .row { display: flex; align-items: center; gap: 8px; }
+    .button { display: inline-block; background-color: #C00000; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
     .button:hover { background-color: #a00000; }
 
-    /* footer + subscribe */
     footer { background-color: #000; color: #fff; text-align: center; padding: 15px; margin-top: 40px; }
     footer form#subscribe-form { margin-top: 10px; display: inline-flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     footer input[type="email"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
@@ -48,19 +46,20 @@
 
 <div class="section">
   <h3>Contact Us</h3>
-  <!-- Custom-validated contact form  -->
   <form id="contact-form" novalidate>
-    <input type="text" name="name" placeholder="Your Name">
-    <input type="email" name="email" placeholder="Your Email">
-    <textarea name="message" placeholder="Your Message" rows="5"></textarea>
+    <input type="text"  name="name"    placeholder="Your Name">
+    <input type="email" name="email"   placeholder="Your Email">
+    <input type="tel"   name="phone"   placeholder="Your Phone (optional)">
+    <textarea name="message" placeholder="Your Message / Custom Order Details" rows="5"></textarea>
+    <label class="row" style="user-select:none;">
+      <input type="checkbox" name="customOrder"> Custom Order
+    </label>
     <button type="submit" class="button">Send</button>
   </form>
 </div>
 
 <footer>
   <p>&copy; 2025 ABC Fitness Studio</p>
-
-  <!-- Subscribe (required on every page) -->
   <form id="subscribe-form" novalidate>
     <label for="subscribe-email" style="position:absolute;left:-9999px;">Your email</label>
     <input type="email" id="subscribe-email" placeholder="Your email">
@@ -68,8 +67,6 @@
   </form>
 </footer>
 
-<!-- JS for Subscribe + Gallery Cart + Contact Form alerts -->
-<script src="script.js"></script>
+<script src="script.js?v=7"></script>
 </body>
 </html>
-
