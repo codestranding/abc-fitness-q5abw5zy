@@ -12,7 +12,8 @@
     h1 { margin: 20px; }
 
     .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-    .gallery .item { width: 200px; min-height: 120px; background-color: #eee; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; padding: 10px; }
+    .gallery .item { width: 200px; min-height: 120px; background-color: #eee; border: 1px solid #ccc;
+                     display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; padding: 10px; }
 
     .actions { text-align: center; padding: 10px; }
     .actions button { margin: 0 6px; }
@@ -48,24 +49,12 @@
 <h1>Gallery</h1>
 
 <div class="gallery">
-  <div class="item">Image 1
-    <button class="add-to-cart" data-item="Image 1">Add to Cart</button>
-  </div>
-  <div class="item">Image 2
-    <button class="add-to-cart" data-item="Image 2">Add to Cart</button>
-  </div>
-  <div class="item">Image 3
-    <button class="add-to-cart" data-item="Image 3">Add to Cart</button>
-  </div>
-  <div class="item">Image 4
-    <button class="add-to-cart" data-item="Image 4">Add to Cart</button>
-  </div>
-  <div class="item">Image 5
-    <button class="add-to-cart" data-item="Image 5">Add to Cart</button>
-  </div>
-  <div class="item">Image 6
-    <button class="add-to-cart" data-item="Image 6">Add to Cart</button>
-  </div>
+  <div class="item">Image 1 <button class="add-to-cart" data-item="Image 1">Add to Cart</button></div>
+  <div class="item">Image 2 <button class="add-to-cart" data-item="Image 2">Add to Cart</button></div>
+  <div class="item">Image 3 <button class="add-to-cart" data-item="Image 3">Add to Cart</button></div>
+  <div class="item">Image 4 <button class="add-to-cart" data-item="Image 4">Add to Cart</button></div>
+  <div class="item">Image 5 <button class="add-to-cart" data-item="Image 5">Add to Cart</button></div>
+  <div class="item">Image 6 <button class="add-to-cart" data-item="Image 6">Add to Cart</button></div>
 </div>
 
 <div class="actions">
@@ -89,7 +78,6 @@
 
 <footer>
   <p>&copy; 2025 ABC Fitness Studio</p>
-  <!-- Subscribe (required on every page) -->
   <form id="subscribe-form" novalidate>
     <label for="subscribe-email" style="position:absolute;left:-9999px;">Your email</label>
     <input type="email" id="subscribe-email" placeholder="Your email">
@@ -97,6 +85,6 @@
   </form>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=7"></script>
 </body>
 </html>
