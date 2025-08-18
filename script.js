@@ -15,7 +15,6 @@
   const clearCart = () => sessionStorage.removeItem(CART_KEY);
 
   ready(() => {
-    /* -------- 1) Footer Subscribe (same behavior as 3.1) -------- */
     const subForm = document.getElementById('subscribe-form');
     if (subForm) {
       subForm.addEventListener('submit', (e) => {
@@ -107,7 +106,7 @@
 
         const payload = { name, email, phone, feedback: message, customOrder };
         const key = `contact_${Date.now()}`;
-        localStorage.setItem(key, JSON.stringify(payload)); // required by Task 3.2
+        localStorage.setItem(key, JSON.stringify(payload)); 
         alert('Thank you for your message');
         contactForm.reset();
       });
