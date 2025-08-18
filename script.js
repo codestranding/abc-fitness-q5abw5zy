@@ -1,130 +1,113 @@
-// Touchstone 3.1 logic (subscribe + gallery cart + contact form)
-
-// make a tiny "ready" helper so this runs whether the DOM is already loaded or not
+// Touchstone 3.2: sessionStorage for cart, localStorage for contact form
 (function () {
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
-  // simple in-memory cart
-  var cart = window.__cart || [];
-  window.__cart = cart;
+  // Helpers for sessionStorage cart
+  const CART_KEY = 'cartItems';
+  const getCart = () => {
+    try { return JSON.parse(sessionStorage.getItem(CART_KEY) || '[]'); }
+    catch { return []; }
+  };
+  const setCart = (arr) => sessionStorage.setItem(CART_KEY, JSON.stringify(arr));
+  const clearCart = () => sessionStorage.removeItem(CART_KEY);
 
-  ready(function () {
-    /* =========== 1) Footer Subscribe (all pages) =========== */
-    var subscribeForm = document.getElementById('subscribe-form');
-    if (subscribeForm) {
-      subscribeForm.addEventListener('submit', function (e) {
+  ready(() => {
+    /* -------- 1) Footer Subscribe (same behavior as 3.1) -------- */
+    const subForm = document.getElementById('subscribe-form');
+    if (subForm) {
+      subForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        var emailInput = document.getElementById('subscribe-email');
-        var email = (emailInput && emailInput.value ? emailInput.value.trim() : '');
-
-        if (!email) {
-          alert('Please fill out this field.');
-          if (emailInput) emailInput.focus();
-          return;
-        }
-
-        // OPTIONAL: add format check by uncommenting the 3 lines below
-        // var isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        // if (!isEmail.test(email)) { alert('Please enter a valid email address.'); return; }
-
+        const email = document.getElementById('subscribe-email')?.value.trim() || '';
+        if (!email) { alert('Please fill out this field.'); return; }
         alert('Thank you for subscribing.');
-        subscribeForm.reset();
+        subForm.reset();
       });
     }
 
-    /* =========== 2) Gallery: Cart Buttons & Modal =========== */
-    var addBtns = document.querySelectorAll('.add-to-cart');
-    addBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var item = btn.getAttribute('data-item') || 'Item';
+    /* -------- 2) Gallery: Cart with sessionStorage -------- */
+    // Add to Cart
+    document.querySelectorAll('.add-to-cart').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.dataset.item || 'Item';
+        const cart = getCart();
         cart.push(item);
+        setCart(cart);
         alert('Item added to the cart');
       });
     });
 
-    var modal = document.getElementById('cart-modal');
-    var itemsList = document.getElementById('cart-items');
-    var viewBtn = document.getElementById('view-cart');
-    var clearBtn = document.getElementById('clear-cart');
-    var processBtn = document.getElementById('process-order');
-    var closeBtn = document.getElementById('close-cart');
+    // Modal controls
+    const modal = document.getElementById('cart-modal');
+    const itemsList = document.getElementById('cart-items');
+    const viewBtn = document.getElementById('view-cart');
+    const clearBtn = document.getElementById('clear-cart');
+    const processBtn = document.getElementById('process-order');
+    const closeBtn = document.getElementById('close-cart');
 
-    function renderCart() {
+    const renderCart = () => {
       if (!itemsList) return;
       itemsList.innerHTML = '';
-      cart.forEach(function (item) {
-        var li = document.createElement('li');
-        li.textContent = item;
+      const cart = getCart();
+      cart.forEach((name) => {
+        const li = document.createElement('li');
+        li.textContent = name;
         itemsList.appendChild(li);
       });
-    }
+    };
 
     if (viewBtn && modal) {
-      viewBtn.addEventListener('click', function () {
+      viewBtn.addEventListener('click', () => {
         renderCart();
         modal.classList.remove('hidden');
       });
     }
-    if (closeBtn && modal) {
-      closeBtn.addEventListener('click', function () {
-        modal.classList.add('hidden');
-      });
-    }
+    if (closeBtn && modal) closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
     if (modal) {
-      modal.addEventListener('click', function (e) {
-        if (e.target === modal) modal.classList.add('hidden');
-      });
-      window.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') modal.classList.add('hidden');
-      });
+      modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.classList.add('hidden'); });
     }
 
     if (clearBtn) {
-      clearBtn.addEventListener('click', function () {
-        if (cart.length) {
-          cart.length = 0;
-          alert('Cart Cleared');
-          renderCart();
-        } else {
-          alert('No items to clear.');
-        }
+      clearBtn.addEventListener('click', () => {
+        const cart = getCart();
+        if (!cart.length) { alert('No items to clear.'); return; }
+        clearCart();
+        renderCart();
+        alert('Cart Cleared');
       });
     }
 
     if (processBtn) {
-      processBtn.addEventListener('click', function () {
-        if (cart.length) {
-          alert('Thank you for your order');
-          cart.length = 0;
-          renderCart();
-        } else {
-          alert('Cart is empty.');
-        }
+      processBtn.addEventListener('click', () => {
+        const cart = getCart();
+        if (!cart.length) { alert('Cart is empty.'); return; }
+        alert('Thank you for your order');
+        clearCart();
+        renderCart();
       });
     }
 
-    /* =========== 3) About/Contact Form Alerts =========== */
-    var contactForm = document.getElementById('contact-form');
+    /* -------- 3) About/Contact: save to localStorage -------- */
+    // Saves name/email/phone/feedback/customOrder to localStorage
+    const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-      contactForm.addEventListener('submit', function (e) {
+      contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        var name = (contactForm.querySelector('[name="name"]') || {}).value || '';
-        var email = (contactForm.querySelector('[name="email"]') || {}).value || '';
-        var message = (contactForm.querySelector('[name="message"]') || {}).value || '';
+        const name = contactForm.querySelector('[name="name"]')?.value.trim() || '';
+        const email = contactForm.querySelector('[name="email"]')?.value.trim() || '';
+        const phone = contactForm.querySelector('[name="phone"]')?.value.trim() || '';
+        const message = contactForm.querySelector('[name="message"]')?.value.trim() || '';
+        const customOrder = contactForm.querySelector('[name="customOrder"]')?.checked || false;
 
-        name = name.trim(); email = email.trim(); message = message.trim();
+        if (!name && !email && !message) { alert('Please enter your name, email, and feedback.'); return; }
+        if (!name || !email || !message) { alert('Please fill out this field.'); return; }
 
-        if (!name && !email && !message) {
-          alert('Please enter your name, email, and feedback.');
-          return;
-        }
-        if (!name || !email || !message) {
-          alert('Please fill out this field.');
-          return;
-        }
+        const payload = { name, email, phone, feedback: message, customOrder };
+        const key = `contact_${Date.now()}`;
+        localStorage.setItem(key, JSON.stringify(payload)); // required by Task 3.2
         alert('Thank you for your message');
         contactForm.reset();
       });
