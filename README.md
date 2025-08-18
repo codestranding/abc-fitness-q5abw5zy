@@ -2,6 +2,10 @@
 
 This is a simple multi-page website project created for my web development class.
 It includes:
+home page
+gallery 
+types of classes
+
 https://codestranding.github.io/abc-fitness-q5abw5zy/
 
 
